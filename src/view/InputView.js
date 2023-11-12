@@ -8,6 +8,7 @@ export const InputView = {
 
   async readDate() {
     const input = await Console.readLineAsync(MESSAGE_NOTIFICATION.VISITED_DATE);
+    // TODO: 유효성 검사
     return input;
   },
 };
