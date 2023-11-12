@@ -1,17 +1,15 @@
-import { Calender } from '../model/Calender.js';
+import { VisitDateService } from '../service/VisitDateService.js';
 import { InputView } from '../view/InputView.js';
 
 export class EventPlaner {
-  constructor() {
-    // TODO: 모든캘린더가 아니라 입력받은 날짜만 메세지로 전달할 필요, 서비스 로직을 추가할 필요
-    // 입력 -> 캘린더 -> 서비스로직 -> 특정날짜의 메세지만 반환
-    this.calender = new Calender();
-  }
+  #visitDate;
 
   async run() {
-    // console.log('getter: ', this.calender.getCalender());
     InputView.readGreeting();
     const visitDate = await InputView.readDate();
-    // TODO: 방문할 날짜를 서비스로직에 가서 캘린더와 일치하는 날짜의 메세지만 반환
+    const visitDateObject = new VisitDateService(visitDate);
+    this.#visitDate = visitDateObject.getVisitDate();
+
+    console.log('visitDate: ', this.#visitDate);
   }
 }
