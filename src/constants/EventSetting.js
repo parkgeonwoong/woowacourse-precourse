@@ -22,4 +22,7 @@ export const CALENDER = Object.freeze({
   IS_WEEKEND: 'isWeekend',
   DEFAULT_ZERO: 0,
   DEFAULT_FALSE: false,
+  SUNDAY: 0,
+  FRIDAY: 5,
+  SATURDAY: 6,
 });

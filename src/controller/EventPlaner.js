@@ -6,6 +6,7 @@ export class EventPlaner {
   }
 
   async run() {
-    console.log('Calender: ', this.calender.getCalender());
+    console.log('getter: ', this.calender.getCalender());
+    console.log('privateTest: ', this.calender);
   }
 }
