@@ -1,8 +1,11 @@
 import { Calender } from '../model/Calender.js';
 
 export class EventPlaner {
+  constructor() {
+    this.calender = new Calender();
+  }
+
   async run() {
-    const a = new Calender();
-    console.log(a);
+    console.log('Calender: ', this.calender.getCalender());
   }
 }

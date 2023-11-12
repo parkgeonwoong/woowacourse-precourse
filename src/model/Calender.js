@@ -4,13 +4,14 @@ export class Calender {
   calender;
 
   constructor() {
-    this.initCalender();
-    this.makeCalender();
-    this.makeChristmasDiscount();
-    this.makeIsSpecial();
+    this.#initCalender();
+    this.#makeCalender();
+    this.#makeChristmasDiscount();
+    this.#makeIsSpecial();
+    this.#makeIsWeekend();
   }
 
-  initCalender() {
+  #initCalender() {
     this.calender = Array.from({ length: THIS_MONTH.LAST_DATE }, () => ({
       [CALENDER.DATE]: CALENDER.DEFAULT_ZERO,
       [CALENDER.DAY]: CALENDER.DEFAULT_ZERO,
@@ -20,7 +21,7 @@ export class Calender {
     }));
   }
 
-  makeCalender() {
+  #makeCalender() {
     this.calender.forEach((_, i) => {
       const getDate = new Date(EVENT_DATE.YEAR, EVENT_DATE.MONTH, i + 1).getDate();
       const getDay = new Date(EVENT_DATE.YEAR, EVENT_DATE.MONTH, i + 1).getDay();
@@ -29,7 +30,7 @@ export class Calender {
     });
   }
 
-  makeChristmasDiscount() {
+  #makeChristmasDiscount() {
     this.calender.forEach((date, i) => {
       if (date.date <= CHIRSTMAS.DAY) {
         this.calender[i][CALENDER.CHRISTMAS_DISCOUNT] =
@@ -38,11 +39,23 @@ export class Calender {
     });
   }
 
-  makeIsSpecial() {
+  #makeIsSpecial() {
     this.calender.forEach((date, i) => {
       if (date.day === 0 || date.date === CHIRSTMAS.DAY) {
         this.calender[i][CALENDER.IS_SPECIAL] = true;
       }
     });
+  }
+
+  #makeIsWeekend() {
+    this.calender.forEach((date, i) => {
+      if (date.day === 5 || date.day === 6) {
+        this.calender[i][CALENDER.IS_WEEKEND] = true;
+      }
+    });
+  }
+
+  getCalender() {
+    return this.calender;
   }
 }
