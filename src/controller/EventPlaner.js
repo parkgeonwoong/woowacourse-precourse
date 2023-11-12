@@ -1,4 +1,5 @@
 import { Calender } from '../model/Calender.js';
+import { InputView } from '../view/InputView.js';
 
 export class EventPlaner {
   constructor() {
@@ -8,5 +9,7 @@ export class EventPlaner {
 
   async run() {
     console.log('getter: ', this.calender.getCalender());
+    InputView.readGreeting();
+    InputView.readDate();
   }
 }
