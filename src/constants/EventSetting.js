@@ -1,3 +1,9 @@
+export const CHIRSTMAS = Object.freeze({
+  DAY: 25,
+  DISCOUNT: 1000,
+  DISCOUNT_STEP: 100,
+});
+
 export const EVENT_DATE = Object.freeze({
   YEAR: 2023,
   MONTH: 11,
@@ -12,4 +18,8 @@ export const CALENDER = Object.freeze({
   DATE: 'date',
   DAY: 'day',
   CHRISTMAS_DISCOUNT: 'christmasDiscount',
+  IS_SPECIAL: 'isSpecial',
+  IS_WEEKEND: 'isWeekend',
+  DEFAULT_ZERO: 0,
+  DEFAULT_FALSE: false,
 });

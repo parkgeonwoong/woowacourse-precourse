@@ -1,11 +1,23 @@
-import { CALENDER, EVENT_DATE, THIS_MONTH } from '../constants/EventSetting.js';
+import { CALENDER, CHIRSTMAS, EVENT_DATE, THIS_MONTH } from '../constants/EventSetting.js';
 
 export class Calender {
-  calender = Array.from({ length: THIS_MONTH.LAST_DATE }, () => ({}));
+  calender;
 
   constructor() {
+    this.initCalender();
     this.makeCalender();
     this.makeChristmasDiscount();
+    this.makeIsSpecial();
+  }
+
+  initCalender() {
+    this.calender = Array.from({ length: THIS_MONTH.LAST_DATE }, () => ({
+      [CALENDER.DATE]: CALENDER.DEFAULT_ZERO,
+      [CALENDER.DAY]: CALENDER.DEFAULT_ZERO,
+      [CALENDER.CHRISTMAS_DISCOUNT]: CALENDER.DEFAULT_ZERO,
+      [CALENDER.IS_SPECIAL]: CALENDER.DEFAULT_FALSE,
+      [CALENDER.IS_WEEKEND]: CALENDER.DEFAULT_FALSE,
+    }));
   }
 
   makeCalender() {
@@ -19,7 +31,18 @@ export class Calender {
 
   makeChristmasDiscount() {
     this.calender.forEach((date, i) => {
-      this.calender[i][CALENDER.CHRISTMAS_DISCOUNT] = date.date < 26 ? 1000 + i * 100 : 0;
+      if (date.date <= CHIRSTMAS.DAY) {
+        this.calender[i][CALENDER.CHRISTMAS_DISCOUNT] =
+          CHIRSTMAS.DISCOUNT + i * CHIRSTMAS.DISCOUNT_STEP;
+      }
+    });
+  }
+
+  makeIsSpecial() {
+    this.calender.forEach((date, i) => {
+      if (date.day === 0 || date.date === CHIRSTMAS.DAY) {
+        this.calender[i][CALENDER.IS_SPECIAL] = true;
+      }
     });
   }
 }
