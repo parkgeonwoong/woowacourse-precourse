@@ -9,8 +9,9 @@ export class EventPlaner {
   }
 
   async run() {
-    console.log('getter: ', this.calender.getCalender());
+    // console.log('getter: ', this.calender.getCalender());
     InputView.readGreeting();
-    InputView.readDate();
+    const visitDate = await InputView.readDate();
+    // TODO: 방문할 날짜를 서비스로직에 가서 캘린더와 일치하는 날짜의 메세지만 반환
   }
 }

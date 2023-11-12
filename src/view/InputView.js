@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE_NOTIFICATION } from '../constants/Message.js';
+import { dateInputValidator } from '../validator/DateInputValidator.js';
 
 export const InputView = {
   readGreeting() {
@@ -7,8 +8,13 @@ export const InputView = {
   },
 
   async readDate() {
-    const input = await Console.readLineAsync(MESSAGE_NOTIFICATION.VISITED_DATE);
-    // TODO: 유효성 검사
-    return input;
+    try {
+      const input = await Console.readLineAsync(MESSAGE_NOTIFICATION.VISITED_DATE);
+      dateInputValidator(input);
+      return input;
+    } catch (err) {
+      Console.print(err.message);
+      return this.readDate();
+    }
   },
 };
