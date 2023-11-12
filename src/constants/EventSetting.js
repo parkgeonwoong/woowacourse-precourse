@@ -7,3 +7,9 @@ export const THIS_MONTH = Object.freeze({
   FIRST_DATE: 1,
   LAST_DATE: new Date(EVENT_DATE.YEAR, EVENT_DATE.MONTH + 1, 0).getDate(),
 });
+
+export const CALENDER = Object.freeze({
+  DATE: 'date',
+  DAY: 'day',
+  CHRISTMAS_DISCOUNT: 'christmasDiscount',
+});
