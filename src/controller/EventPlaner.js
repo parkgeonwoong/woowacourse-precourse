@@ -48,4 +48,8 @@ export class EventPlaner {
     const totalPrice = toCommaFormat(this.#orderService.calculateBeforeTotalPrice());
     OutputView.printBeforeDiscountPrice(totalPrice);
   }
+
+  readGiftMenu() {
+    OutputView.printGiftMenu();
+  }
 }

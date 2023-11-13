@@ -21,4 +21,10 @@ export const OutputView = {
   printBeforeDiscountPrice(price) {
     Console.print(`${price}원`);
   },
+
+  printGiftMenu() {
+    Console.print('\n<증정 메뉴>');
+  },
+
+  printGiftMenuList() {},
 };

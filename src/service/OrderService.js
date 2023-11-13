@@ -1,6 +1,9 @@
+import { APPLY_EVENT_PRICE } from '../constants/EventSetting.js';
 import { MENU } from '../constants/Menu.js';
 
 export class OrderService {
+  #totalPrice;
+
   constructor(orderMenu, visitDate) {
     this.orderMenu = orderMenu;
     this.visitDate = visitDate;
@@ -18,7 +21,11 @@ export class OrderService {
         }
       });
     });
-
+    this.#totalPrice = totalPrice;
     return totalPrice;
+  }
+
+  canEvent() {
+    return this.#totalPrice >= APPLY_EVENT_PRICE;
   }
 }
