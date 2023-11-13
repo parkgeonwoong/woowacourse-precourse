@@ -1,6 +1,7 @@
 import { VisitDateService } from '../service/VisitDateService.js';
 import { toSplitList } from '../utils/ToData.js';
 import { InputView } from '../view/InputView.js';
+import { OutputView } from '../view/OutputView.js';
 
 export class EventPlaner {
   #visitDate;
@@ -13,9 +14,10 @@ export class EventPlaner {
   async run() {
     await this.readAndProcessVisitDate();
     await this.readAndChangeOrderMenu();
+    this.readPreview();
 
-    console.log('visitDate: ', this.#visitDate);
-    console.log('orderMenu: ', this.#orderMenu);
+    // console.log('visitDate: ', this.#visitDate);
+    // console.log('orderMenu: ', this.#orderMenu);
   }
 
   async readAndProcessVisitDate() {
@@ -27,5 +29,10 @@ export class EventPlaner {
   async readAndChangeOrderMenu() {
     const orderMenu = await InputView.readOrderMenu();
     this.#orderMenu = toSplitList(orderMenu);
+  }
+
+  readPreview() {
+    const { date } = this.#visitDate;
+    OutputView.readPreview(date);
   }
 }
