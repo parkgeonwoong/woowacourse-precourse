@@ -1,4 +1,3 @@
-// - 메뉴의 개수는 1 이상의 숫자만 입력되도록 해주세요. 이외의 입력값은 "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
 // - 메뉴 형식이 예시와 다른 경우, "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
 // - 중복 메뉴를 입력한 경우(e.g. 시저샐러드-1,시저샐러드-1), "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
 // - 음료만 주문 시, 주문할 수 없습니다.
@@ -10,8 +9,9 @@ import { MENU } from '../constants/Menu.js';
 export function menuInputValidator(input) {
   const inputList = input.split(',').map((menu) => menu.split('-'));
 
-  console.log('inputList:', inputList);
+  //   console.log('inputList:', inputList);
   checkMenuName(inputList);
+  checkMenuCount(inputList);
 }
 
 function checkMenuName(menuList) {
@@ -20,10 +20,21 @@ function checkMenuName(menuList) {
     return acc;
   }, []);
 
-  console.log('menuNameList: ', menuNameList);
-
+  //   console.log('menuNameList: ', menuNameList);
   menuList.forEach((menu) => {
-    if (!menuNameList.includes(menu[0])) {
+    const [menuName] = menu;
+    if (!menuNameList.includes(menuName)) {
+      throw new Error(ERROR.INVALID_ORDER);
+    }
+  });
+}
+
+function checkMenuCount(menuList) {
+  menuList.forEach((menu) => {
+    const [, menuCount] = menu;
+    const menuCountToNumber = parseInt(menuCount);
+
+    if (menuCount < 1 || isNaN(menuCountToNumber)) {
       throw new Error(ERROR.INVALID_ORDER);
     }
   });
