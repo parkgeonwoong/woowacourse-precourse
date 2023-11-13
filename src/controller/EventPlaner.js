@@ -1,11 +1,13 @@
+import { OrderService } from '../service/OrderService.js';
 import { VisitDateService } from '../service/VisitDateService.js';
-import { toSplitList } from '../utils/ToData.js';
+import { toCommaFormat, toSplitList } from '../utils/ToData.js';
 import { InputView } from '../view/InputView.js';
 import { OutputView } from '../view/OutputView.js';
 
 export class EventPlaner {
   #visitDate;
   #orderMenu;
+  #orderService;
 
   constructor() {
     InputView.readGreeting();
@@ -14,9 +16,12 @@ export class EventPlaner {
   async run() {
     await this.readAndProcessVisitDate();
     await this.readAndChangeOrderMenu();
-    this.readPreview();
-    this.readMenu();
+    this.readPreviewAndMenu();
 
+    this.#orderService = new OrderService(this.#orderMenu, this.#visitDate);
+    this.readBeforeDiscount();
+
+    // console.log(this.#orderService);
     // console.log('visitDate: ', this.#visitDate);
     // console.log('orderMenu: ', this.#orderMenu);
   }
@@ -32,13 +37,15 @@ export class EventPlaner {
     this.#orderMenu = toSplitList(orderMenu);
   }
 
-  readPreview() {
-    const { date } = this.#visitDate;
-    OutputView.readPreview(date);
-  }
-
-  readMenu() {
+  readPreviewAndMenu() {
+    OutputView.readPreview(this.#visitDate);
     OutputView.printMenu();
     this.#orderMenu.forEach((menu) => OutputView.printMenuList(menu));
+  }
+
+  readBeforeDiscount() {
+    OutputView.printBeforeDiscount();
+    const totalPrice = toCommaFormat(this.#orderService.calculateBeforeTotalPrice());
+    OutputView.printBeforeDiscountPrice(totalPrice);
   }
 }
