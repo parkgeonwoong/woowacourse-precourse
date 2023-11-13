@@ -1,16 +1,15 @@
-// - 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.
-
 import { ERROR } from '../constants/Error.js';
+import { MAXIMUM_ORDER, MINIMUM_MENU_COUNT } from '../constants/EventSetting.js';
 import { MENU } from '../constants/Menu.js';
 
 export function menuInputValidator(input) {
   const inputList = input.split(',').map((menu) => menu.split('-'));
 
-  console.log('inputList:', inputList);
   checkMenuName(inputList);
   checkMenuCount(inputList);
   checkDuplicateMenu(inputList);
   checkOnlyDrink(inputList);
+  checkMaximumOrder(inputList);
 }
 
 function checkMenuName(menuList) {
@@ -32,7 +31,7 @@ function checkMenuCount(menuList) {
     const [, menuCount] = menu;
     const menuCountToNumber = parseInt(menuCount);
 
-    if (menuCount < 1 || isNaN(menuCountToNumber)) {
+    if (menuCount < MINIMUM_MENU_COUNT || isNaN(menuCountToNumber)) {
       throw new Error(ERROR.INVALID_ORDER);
     }
   });
@@ -56,5 +55,11 @@ function checkOnlyDrink(menuList) {
   }
 }
 
-// 티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1
-// 제로콜라-2,레드와인-1,샴페인-1
+function checkMaximumOrder(menuList) {
+  const menuCountList = menuList.map(([, menuCount]) => Number(menuCount));
+  const menuCountSum = menuCountList.reduce((acc, menuCount) => acc + menuCount, 0);
+
+  if (menuCountSum > MAXIMUM_ORDER) {
+    throw new Error(ERROR.MAXIMUM_ORDER);
+  }
+}
