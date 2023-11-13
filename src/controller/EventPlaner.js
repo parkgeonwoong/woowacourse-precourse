@@ -13,6 +13,5 @@ export class EventPlaner {
     console.log('visitDate: ', this.#visitDate);
 
     const orderMenu = await InputView.readOrderMenu();
-    console.log('orderMenu: ', orderMenu);
   }
 }
