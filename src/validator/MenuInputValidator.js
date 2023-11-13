@@ -31,7 +31,11 @@ function checkMenuCount(menuList) {
     const [, menuCount] = menu;
     const menuCountToNumber = parseInt(menuCount);
 
-    if (menuCount < MINIMUM_MENU_COUNT || isNaN(menuCountToNumber)) {
+    if (
+      menuCount < MINIMUM_MENU_COUNT ||
+      isNaN(menuCountToNumber) ||
+      Number(menuCount) !== menuCountToNumber
+    ) {
       throw new Error(ERROR.INVALID_ORDER);
     }
   });
