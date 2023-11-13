@@ -1,6 +1,7 @@
 export const MAXIMUM_ORDER = 20;
 export const MINIMUM_MENU_COUNT = 1;
 export const APPLY_EVENT_PRICE = 10000;
+export const GIFT_PRICE = 120000;
 
 export const CHIRSTMAS = Object.freeze({
   DAY: 25,

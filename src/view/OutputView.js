@@ -26,5 +26,7 @@ export const OutputView = {
     Console.print('\n<증정 메뉴>');
   },
 
-  printGiftMenuList() {},
+  printGiftMenuList(isGiftMenu) {
+    Console.print(isGiftMenu ? '샴페인 1개' : '없음');
+  },
 };

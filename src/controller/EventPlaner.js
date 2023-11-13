@@ -21,6 +21,8 @@ export class EventPlaner {
     this.#orderService = new OrderService(this.#orderMenu, this.#visitDate);
     this.readBeforeDiscount();
 
+    this.readGiftMenu();
+
     // console.log(this.#orderService);
     // console.log('visitDate: ', this.#visitDate);
     // console.log('orderMenu: ', this.#orderMenu);
@@ -51,5 +53,6 @@ export class EventPlaner {
 
   readGiftMenu() {
     OutputView.printGiftMenu();
+    OutputView.printGiftMenuList(this.#orderService.isGiftMenu());
   }
 }

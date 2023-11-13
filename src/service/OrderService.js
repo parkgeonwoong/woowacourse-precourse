@@ -1,4 +1,4 @@
-import { APPLY_EVENT_PRICE } from '../constants/EventSetting.js';
+import { APPLY_EVENT_PRICE, GIFT_PRICE } from '../constants/EventSetting.js';
 import { MENU } from '../constants/Menu.js';
 
 export class OrderService {
@@ -27,5 +27,12 @@ export class OrderService {
 
   canEvent() {
     return this.#totalPrice >= APPLY_EVENT_PRICE;
+  }
+
+  isGiftMenu() {
+    if (this.canEvent() && this.#totalPrice >= GIFT_PRICE) {
+      return true;
+    }
+    return false;
   }
 }
