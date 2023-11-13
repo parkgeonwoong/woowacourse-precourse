@@ -1,5 +1,4 @@
-// - 음료만 주문 시, 주문할 수 없습니다.
-// - 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. (e.g. 시저샐러드-1, 티본스테이크-1, 크리스마스파스타-1, 제로콜라-3, 아이스크림-1의 총개수는 7개)
+// - 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.
 
 import { ERROR } from '../constants/Error.js';
 import { MENU } from '../constants/Menu.js';
@@ -11,6 +10,7 @@ export function menuInputValidator(input) {
   checkMenuName(inputList);
   checkMenuCount(inputList);
   checkDuplicateMenu(inputList);
+  checkOnlyDrink(inputList);
 }
 
 function checkMenuName(menuList) {
@@ -19,7 +19,6 @@ function checkMenuName(menuList) {
     return acc;
   }, []);
 
-  //   console.log('menuNameList: ', menuNameList);
   menuList.forEach((menu) => {
     const [menuName] = menu;
     if (!menuNameList.includes(menuName)) {
@@ -48,4 +47,14 @@ function checkDuplicateMenu(menuList) {
   }
 }
 
+function checkOnlyDrink(menuList) {
+  const drinkMenuList = MENU.drink.map((item) => item.name);
+  const isOnlyDrink = menuList.every(([menuName]) => drinkMenuList.includes(menuName));
+
+  if (isOnlyDrink) {
+    throw new Error(ERROR.ONLY_DRINK);
+  }
+}
+
 // 티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1
+// 제로콜라-2,레드와인-1,샴페인-1
