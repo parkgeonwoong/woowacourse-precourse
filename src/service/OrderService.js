@@ -30,9 +30,6 @@ export class OrderService {
   }
 
   isGiftMenu() {
-    if (this.canEvent() && this.#totalPrice >= GIFT_PRICE) {
-      return true;
-    }
-    return false;
+    return this.canEvent() && this.#totalPrice >= GIFT_PRICE;
   }
 }
