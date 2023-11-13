@@ -5,7 +5,12 @@ export const OutputView = {
   readPreview(date) {
     Console.print(MESSAGE_EVENT.preview(date));
   },
+
   printMenu() {
     Console.print('<주문 메뉴>');
+  },
+
+  printMenuList([menuName, menuCount]) {
+    Console.print(`${menuName} ${menuCount}개`);
   },
 };

@@ -15,6 +15,7 @@ export class EventPlaner {
     await this.readAndProcessVisitDate();
     await this.readAndChangeOrderMenu();
     this.readPreview();
+    this.readMenu();
 
     // console.log('visitDate: ', this.#visitDate);
     // console.log('orderMenu: ', this.#orderMenu);
@@ -34,5 +35,10 @@ export class EventPlaner {
   readPreview() {
     const { date } = this.#visitDate;
     OutputView.readPreview(date);
+  }
+
+  readMenu() {
+    OutputView.printMenu();
+    this.#orderMenu.forEach((menu) => OutputView.printMenuList(menu));
   }
 }
