@@ -12,7 +12,6 @@ describe('메뉴 입력 유효성 검사', () => {
     expect(() => menuInputValidator(invalidInput)).toThrow(ERROR.INVALID_ORDER);
   });
 
-  //  - 메뉴의 개수는 1 이상의 숫자만 입력되도록 해주세요. 이외의 입력값은 "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
   test('메뉴의 개수는 1 이상의 숫자가 아닌경우 예외가 발생합니다.', () => {
     const invalidInput = '해산물파스타-0,레드와인-1,초코케이크-1';
     const invalidInputPoint = '해산물파스타-1,레드와인-1,초코케이크-1.5';
@@ -23,8 +22,18 @@ describe('메뉴 입력 유효성 검사', () => {
     expect(() => menuInputValidator(invalidInputString)).toThrow(ERROR.INVALID_ORDER);
   });
 
-  //  - 메뉴 형식이 예시와 다른 경우, "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
-  //  - 중복 메뉴를 입력한 경우(e.g. 시저샐러드-1,시저샐러드-1), "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
-  //  - 음료만 주문 시, 주문할 수 없습니다.
-  //  - 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. (e.g. 시저샐러드-1, 티본스테이크-1, 크리스마스파스타-1, 제로콜라-3, 아이스크림-1의 총개수는 7개)
+  test('중복 메뉴를 입력한 경우 예외가 발생합니다.', () => {
+    const invalidInput = '해산물파스타-1,레드와인-1,초코케이크-1,해산물파스타-1';
+    expect(() => menuInputValidator(invalidInput)).toThrow(ERROR.INVALID_ORDER);
+  });
+
+  test('음료만 주문한 경우 예외가 발생합니다.', () => {
+    const invalidInput = '제로콜라-2,레드와인-1,샴페인-1';
+    expect(() => menuInputValidator(invalidInput)).toThrow(ERROR.ONLY_DRINK);
+  });
+
+  test('메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.', () => {
+    const invalidInput = '양송이수프-10,티본스테이크-11';
+    expect(() => menuInputValidator(invalidInput)).toThrow(ERROR.MAXIMUM_ORDER);
+  });
 });
