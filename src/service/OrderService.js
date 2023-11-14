@@ -1,4 +1,4 @@
-import { APPLY_EVENT_PRICE, GIFT_PRICE } from '../constants/EventSetting.js';
+import { APPLY_EVENT_PRICE, BENEFIT_DETAILS, GIFT_PRICE } from '../constants/EventSetting.js';
 import { MENU } from '../constants/Menu.js';
 
 export class OrderService {
@@ -55,20 +55,25 @@ export class OrderService {
   }
 
   insertWeekendDiscount(isWeekend, benefitDetailsList) {
-    const category = isWeekend ? 'main' : 'dessert';
+    const category = isWeekend ? BENEFIT_DETAILS.MENU.MAIN : BENEFIT_DETAILS.MENU.DESSERT;
     let count = this.orderMenu
       .filter(([menuName]) => MENU[category].some((menu) => menu.name === menuName))
       .reduce((acc, [, menuCount]) => acc + Number(menuCount), 0);
 
     if (count === 0) return;
-    benefitDetailsList.push({ name: `${isWeekend ? '주말' : '평일'} 할인`, price: count * 2023 });
+    benefitDetailsList.push({
+      name: `${isWeekend ? '주말' : '평일'} 할인`,
+      price: count * BENEFIT_DETAILS.IS_WEEKEND_DISCOUNT,
+    });
   }
 
   insertSpecialDiscount(isSpecial, benefitDetailsList) {
-    isSpecial && benefitDetailsList.push({ name: '특별 할인', price: 1000 });
+    isSpecial &&
+      benefitDetailsList.push({ name: '특별 할인', price: BENEFIT_DETAILS.IS_SPECIAL_DISCOUNT });
   }
 
   insertGiftEvent(isGiftMenu, benefitDetailsList) {
-    isGiftMenu && benefitDetailsList.push({ name: '증정 이벤트', price: 25000 });
+    isGiftMenu &&
+      benefitDetailsList.push({ name: '증정 이벤트', price: BENEFIT_DETAILS.GIFT_CHAMPAGNE_PRICE });
   }
 }

@@ -3,6 +3,16 @@ export const MINIMUM_MENU_COUNT = 1;
 export const APPLY_EVENT_PRICE = 10000;
 export const GIFT_PRICE = 120000;
 
+export const BENEFIT_DETAILS = Object.freeze({
+  MENU: Object.freeze({
+    MAIN: 'main',
+    DESSERT: 'dessert',
+  }),
+  IS_WEEKEND_DISCOUNT: 2023,
+  IS_SPECIAL_DISCOUNT: 1000,
+  GIFT_CHAMPAGNE_PRICE: 25000,
+});
+
 export const CHIRSTMAS = Object.freeze({
   DAY: 25,
   DISCOUNT: 1000,
