@@ -48,7 +48,7 @@ export const OutputView = {
   },
 
   printTotalBenefitPrice(price) {
-    Console.print(`-${toCommaFormat(price)}원`);
+    Console.print(`${price ? -toCommaFormat(price) : 0}원`);
   },
 
   printAfterDiscount() {
