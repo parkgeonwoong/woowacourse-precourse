@@ -23,10 +23,7 @@ export class EventPlaner {
     this.readGiftMenu();
     this.readBenefitDetails();
     this.readTotalBenefitPrice();
-
-    // console.log(this.#orderService);
-    // console.log('visitDate: ', this.#visitDate);
-    // console.log('orderMenu: ', this.#orderMenu);
+    this.readAfterDiscount();
   }
 
   async readAndProcessVisitDate() {
@@ -69,7 +66,13 @@ export class EventPlaner {
 
   readTotalBenefitPrice() {
     OutputView.printTotalBenefit();
-    const totalBenefitPrice = this.#orderService.beniefitTotalPrice();
+    const totalBenefitPrice = this.#orderService.benefitTotalPrice();
     OutputView.printTotalBenefitPrice(totalBenefitPrice);
+  }
+
+  readAfterDiscount() {
+    OutputView.printAfterDiscount();
+    const totalPrice = this.#orderService.calculateAfterTotalPrice();
+    OutputView.printAfterDiscountPrice(totalPrice);
   }
 }

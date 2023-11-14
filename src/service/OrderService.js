@@ -77,7 +77,13 @@ export class OrderService {
       benefitDetailsList.push({ name: '증정 이벤트', price: BENEFIT_DETAILS.GIFT_CHAMPAGNE_PRICE });
   }
 
-  beniefitTotalPrice() {
+  benefitTotalPrice() {
     return this.#benefitDetailsList.reduce((acc, { price }) => acc + price, 0);
+  }
+
+  calculateAfterTotalPrice() {
+    const benefitTotalPrice = this.benefitTotalPrice();
+    const isGiftMenuPrice = this.isGiftMenu() ? BENEFIT_DETAILS.GIFT_CHAMPAGNE_PRICE : 0;
+    return this.#totalPrice - benefitTotalPrice + isGiftMenuPrice;
   }
 }

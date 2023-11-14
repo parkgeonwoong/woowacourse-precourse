@@ -50,4 +50,12 @@ export const OutputView = {
   printTotalBenefitPrice(price) {
     Console.print(`-${toCommaFormat(price)}원`);
   },
+
+  printAfterDiscount() {
+    Console.print('\n<할인 후 예상 결제 금액>');
+  },
+
+  printAfterDiscountPrice(price) {
+    Console.print(`${toCommaFormat(price)}원`);
+  },
 };
