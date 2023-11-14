@@ -7,63 +7,39 @@ export const OutputView = {
     Console.print(MESSAGE_EVENT.preview(date));
   },
 
-  printMenu() {
-    Console.print('<주문 메뉴>');
+  printTitle(title) {
+    Console.print(`\n<${title}>`);
   },
 
   printMenuList([menuName, menuCount]) {
     Console.print(`${menuName} ${menuCount}개`);
   },
 
-  printBeforeDiscount() {
-    Console.print('\n<할인 전 총주문 금액>');
-  },
-
   printBeforeDiscountPrice(price) {
     Console.print(`${toCommaFormat(price)}원`);
-  },
-
-  printGiftMenu() {
-    Console.print('\n<증정 메뉴>');
   },
 
   printGiftMenuList(isGiftMenu) {
     Console.print(isGiftMenu ? '샴페인 1개' : '없음');
   },
 
-  printBenefitDetails() {
-    Console.print('\n<혜택 내역>');
-  },
-
   printBenefitDetailsList({ name, price }) {
     Console.print(`${name}: -${toCommaFormat(price)}원`);
-  },
-
-  printNothing() {
-    Console.print('없음');
-  },
-
-  printTotalBenefit() {
-    Console.print('\n<총혜택 금액>');
   },
 
   printTotalBenefitPrice(price) {
     Console.print(`${price !== 0 ? '-' : ''}${toCommaFormat(price)}원`);
   },
 
-  printAfterDiscount() {
-    Console.print('\n<할인 후 예상 결제 금액>');
-  },
-
   printAfterDiscountPrice(price) {
     Console.print(`${toCommaFormat(price)}원`);
   },
 
-  printEventBadge() {
-    Console.print('\n<12월 이벤트 배지>');
-  },
-
   printEventBadgeList(badge) {
     Console.print(`${badge ? badge : '없음'}`);
+  },
+
+  printNothing() {
+    Console.print('없음');
   },
 };

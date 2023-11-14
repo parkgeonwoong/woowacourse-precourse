@@ -1,6 +1,7 @@
 import { APPLY_EVENT_PRICE, BENEFIT_DETAILS, GIFT_PRICE } from '../constants/EventSetting.js';
 import { MENU } from '../constants/Menu.js';
 
+// FIXME: 클래스 분리?, 멤버변수 변경 고민
 export class OrderService {
   #totalPrice;
   #benefitDetailsList;
@@ -88,18 +89,17 @@ export class OrderService {
   }
 
   calculateEventBadge() {
-    let eventBadge = '';
     const totalBenefitPrice = this.benefitTotalPrice();
-
-    if (totalBenefitPrice >= 5000) {
-      eventBadge = '별';
+    // FIXME: 상수로 빼기
+    switch (true) {
+      case totalBenefitPrice >= 20000:
+        return '산타';
+      case totalBenefitPrice >= 10000:
+        return '트리';
+      case totalBenefitPrice >= 5000:
+        return '별';
+      default:
+        return '';
     }
-    if (totalBenefitPrice >= 10000) {
-      eventBadge = '트리';
-    }
-    if (totalBenefitPrice >= 20000) {
-      eventBadge = '산타';
-    }
-    return eventBadge;
   }
 }

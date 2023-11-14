@@ -1,3 +1,4 @@
+import { TITLE } from '../constants/Message.js';
 import { OrderService } from '../service/OrderService.js';
 import { VisitDateService } from '../service/VisitDateService.js';
 import { toSplitList } from '../utils/ToData.js';
@@ -40,23 +41,23 @@ export class EventPlaner {
 
   readPreviewAndMenu() {
     OutputView.readPreview(this.#visitDate);
-    OutputView.printMenu();
+    OutputView.printTitle(TITLE.MENU);
     this.#orderMenu.forEach((menu) => OutputView.printMenuList(menu));
   }
 
   readBeforeDiscount() {
-    OutputView.printBeforeDiscount();
+    OutputView.printTitle(TITLE.BEFORE_DISCOUNT);
     const totalPrice = this.#orderService.calculateBeforeTotalPrice();
     OutputView.printBeforeDiscountPrice(totalPrice);
   }
 
   readGiftMenu() {
-    OutputView.printGiftMenu();
+    OutputView.printTitle(TITLE.GIFT_MENU);
     OutputView.printGiftMenuList(this.#orderService.isGiftMenu());
   }
 
   readBenefitDetails() {
-    OutputView.printBenefitDetails();
+    OutputView.printTitle(TITLE.BENEFIT_DETAILS);
     const benefit = this.#orderService.benefitDetails();
     benefit.forEach((benefit) => OutputView.printBenefitDetailsList(benefit));
 
@@ -66,19 +67,19 @@ export class EventPlaner {
   }
 
   readTotalBenefitPrice() {
-    OutputView.printTotalBenefit();
+    OutputView.printTitle(TITLE.TOTAL_BENEFIT);
     const totalBenefitPrice = this.#orderService.benefitTotalPrice();
     OutputView.printTotalBenefitPrice(totalBenefitPrice);
   }
 
   readAfterDiscount() {
-    OutputView.printAfterDiscount();
+    OutputView.printTitle(TITLE.AFTER_DISCOUNT);
     const totalPrice = this.#orderService.calculateAfterTotalPrice();
     OutputView.printAfterDiscountPrice(totalPrice);
   }
 
   readEventBadge() {
-    OutputView.printEventBadge();
+    OutputView.printTitle(TITLE.EVENT_BADGE);
     OutputView.printEventBadgeList(this.#orderService.calculateEventBadge());
   }
 }
