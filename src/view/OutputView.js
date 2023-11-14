@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE_EVENT } from '../constants/Message.js';
+import { toCommaFormat } from '../utils/ToData.js';
 
 export const OutputView = {
   readPreview({ date }) {
@@ -34,7 +35,11 @@ export const OutputView = {
     Console.print('\n<혜택 내역>');
   },
 
-  printBenefitDetailsList() {
-    Console.print();
+  printBenefitDetailsList({ name, price }) {
+    Console.print(`${name}: -${toCommaFormat(price)}원`);
+  },
+
+  printNothing() {
+    Console.print('없음');
   },
 };

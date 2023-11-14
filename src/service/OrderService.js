@@ -39,13 +39,13 @@ export class OrderService {
     const { christmasDiscount, isSpecial, isWeekend } = this.visitDate;
 
     if (!this.canEvent()) {
+      this.#benefitDetailsList = benefitDetailsList;
       return benefitDetailsList;
     }
     this.insertChristmasDiscount(christmasDiscount, benefitDetailsList);
     this.insertWeekendDiscount(isWeekend, benefitDetailsList);
     this.insertSpecialDiscount(isSpecial, benefitDetailsList);
     this.insertGiftEvent(this.isGiftMenu(), benefitDetailsList);
-
     this.#benefitDetailsList = benefitDetailsList;
     return benefitDetailsList;
   }

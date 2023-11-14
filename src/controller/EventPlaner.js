@@ -58,6 +58,11 @@ export class EventPlaner {
 
   readBenefitDetails() {
     OutputView.printBenefitDetails();
-    console.log(this.#orderService.benefitDetails());
+    const benefit = this.#orderService.benefitDetails();
+    benefit.forEach((benefit) => OutputView.printBenefitDetailsList(benefit));
+
+    if (benefit.length === 0) {
+      OutputView.printNothing();
+    }
   }
 }
