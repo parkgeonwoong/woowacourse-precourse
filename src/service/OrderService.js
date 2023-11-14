@@ -3,6 +3,7 @@ import { MENU } from '../constants/Menu.js';
 
 export class OrderService {
   #totalPrice;
+  #benefitDetailsList;
 
   constructor(orderMenu, visitDate) {
     this.orderMenu = orderMenu;
@@ -42,8 +43,11 @@ export class OrderService {
     }
     this.insertChristmasDiscount(christmasDiscount, benefitDetailsList);
     this.insertWeekendDiscount(isWeekend, benefitDetailsList);
+    this.insertSpecialDiscount(isSpecial, benefitDetailsList);
+    this.insertGiftEvent(this.isGiftMenu(), benefitDetailsList);
 
-    console.log('benefitDetailsList:', benefitDetailsList);
+    this.#benefitDetailsList = benefitDetailsList;
+    return benefitDetailsList;
   }
 
   insertChristmasDiscount(christmasDiscount, benefitDetailsList) {
@@ -56,8 +60,15 @@ export class OrderService {
       .filter(([menuName]) => MENU[category].some((menu) => menu.name === menuName))
       .reduce((acc, [, menuCount]) => acc + Number(menuCount), 0);
 
+    if (count === 0) return;
     benefitDetailsList.push({ name: `${isWeekend ? '주말' : '평일'} 할인`, price: count * 2023 });
   }
-}
 
-// 해산물파스타-2,크리스마스파스타-1,티본스테이크-1
+  insertSpecialDiscount(isSpecial, benefitDetailsList) {
+    isSpecial && benefitDetailsList.push({ name: '특별 할인', price: 1000 });
+  }
+
+  insertGiftEvent(isGiftMenu, benefitDetailsList) {
+    isGiftMenu && benefitDetailsList.push({ name: '증정 이벤트', price: 25000 });
+  }
+}

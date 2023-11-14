@@ -58,7 +58,6 @@ export class EventPlaner {
 
   readBenefitDetails() {
     OutputView.printBenefitDetails();
-    console.log(this.#orderService);
     console.log(this.#orderService.benefitDetails());
   }
 }
