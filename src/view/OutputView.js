@@ -29,4 +29,12 @@ export const OutputView = {
   printGiftMenuList(isGiftMenu) {
     Console.print(isGiftMenu ? '샴페인 1개' : '없음');
   },
+
+  printBenefitDetails() {
+    Console.print('\n<혜택 내역>');
+  },
+
+  printBenefitDetailsList() {
+    Console.print();
+  },
 };
