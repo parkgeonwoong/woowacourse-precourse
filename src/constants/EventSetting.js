@@ -3,41 +3,31 @@ export const MINIMUM_MENU_COUNT = 1;
 export const APPLY_EVENT_PRICE = 10000;
 export const GIFT_PRICE = 120000;
 
-export const BENEFIT_DETAILS = Object.freeze({
+export const BENEFIT = Object.freeze({
   MENU: Object.freeze({
     MAIN: 'main',
     DESSERT: 'dessert',
   }),
-  IS_WEEKEND_DISCOUNT: 2023,
-  IS_SPECIAL_DISCOUNT: 1000,
-  GIFT_CHAMPAGNE_PRICE: 25000,
+  WEEK: Object.freeze({
+    END_SALE: '주말 할인',
+    DAY_SALE: '평일 할인',
+    DISCOUNT: 2023,
+  }),
+  SPECIAL: Object.freeze({
+    SALE: '특별 할인',
+    DISCOUNT: 1000,
+  }),
+  GIFT: Object.freeze({
+    EVENT: '증정 이벤트',
+    PRICE: 25000,
+  }),
 });
 
-export const CHIRSTMAS = Object.freeze({
-  DAY: 25,
-  DISCOUNT: 1000,
-  DISCOUNT_STEP: 100,
-});
-
-export const EVENT_DATE = Object.freeze({
-  YEAR: 2023,
-  MONTH: 11,
-});
-
-export const THIS_MONTH = Object.freeze({
-  FIRST_DATE: 1,
-  LAST_DATE: new Date(EVENT_DATE.YEAR, EVENT_DATE.MONTH + 1, 0).getDate(),
-});
-
-export const CALENDER = Object.freeze({
-  DATE: 'date',
-  DAY: 'day',
-  CHRISTMAS_DISCOUNT: 'christmasDiscount',
-  IS_SPECIAL: 'isSpecial',
-  IS_WEEKEND: 'isWeekend',
-  DEFAULT_ZERO: 0,
-  DEFAULT_FALSE: false,
-  SUNDAY: 0,
-  FRIDAY: 5,
-  SATURDAY: 6,
+export const BADGE = Object.freeze({
+  SANTA: '산타',
+  SANTA_PRICE: 20000,
+  TREE: '트리',
+  TREE_PRICE: 10000,
+  STAR: '별',
+  STAR_PRICE: 10000,
 });

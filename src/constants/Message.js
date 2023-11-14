@@ -1,4 +1,4 @@
-import { EVENT_DATE } from './EventSetting.js';
+import { EVENT_DATE } from './Date.js';
 
 export const MESSAGE_NOTIFICATION = Object.freeze({
   GREETING: `안녕하세요! 우테코 식당 ${EVENT_DATE.MONTH + 1}월 이벤트 플래너입니다.`,

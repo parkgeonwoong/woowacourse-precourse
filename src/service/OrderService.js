@@ -1,7 +1,6 @@
-import { APPLY_EVENT_PRICE, BENEFIT_DETAILS, GIFT_PRICE } from '../constants/EventSetting.js';
+import { APPLY_EVENT_PRICE, BADGE, BENEFIT, GIFT_PRICE } from '../constants/EventSetting.js';
 import { MENU } from '../constants/Menu.js';
 
-// FIXME: 클래스 분리?, 멤버변수 변경 고민
 export class OrderService {
   #totalPrice;
   #benefitDetailsList;
@@ -27,55 +26,54 @@ export class OrderService {
     return totalPrice;
   }
 
-  canEvent() {
+  #canEvent() {
     return this.#totalPrice >= APPLY_EVENT_PRICE;
   }
 
   isGiftMenu() {
-    return this.canEvent() && this.#totalPrice >= GIFT_PRICE;
+    return this.#canEvent() && this.#totalPrice >= GIFT_PRICE;
   }
 
   benefitDetails() {
     const benefitDetailsList = [];
     const { christmasDiscount, isSpecial, isWeekend } = this.visitDate;
 
-    if (!this.canEvent()) {
+    if (!this.#canEvent()) {
       this.#benefitDetailsList = benefitDetailsList;
       return benefitDetailsList;
     }
-    this.insertChristmasDiscount(christmasDiscount, benefitDetailsList);
-    this.insertWeekendDiscount(isWeekend, benefitDetailsList);
-    this.insertSpecialDiscount(isSpecial, benefitDetailsList);
-    this.insertGiftEvent(this.isGiftMenu(), benefitDetailsList);
+    this.#insertChristmasDiscount(christmasDiscount, benefitDetailsList);
+    this.#insertWeekendDiscount(isWeekend, benefitDetailsList);
+    this.#insertSpecialDiscount(isSpecial, benefitDetailsList);
+    this.#insertGiftEvent(this.isGiftMenu(), benefitDetailsList);
     this.#benefitDetailsList = benefitDetailsList;
     return benefitDetailsList;
   }
 
-  insertChristmasDiscount(christmasDiscount, benefitDetailsList) {
+  #insertChristmasDiscount(christmasDiscount, benefitDetailsList) {
     benefitDetailsList.push({ name: '크리스마스 디데이 할인', price: christmasDiscount });
   }
 
-  insertWeekendDiscount(isWeekend, benefitDetailsList) {
-    const category = isWeekend ? BENEFIT_DETAILS.MENU.MAIN : BENEFIT_DETAILS.MENU.DESSERT;
+  #insertWeekendDiscount(isWeekend, benefitDetailsList) {
+    const category = isWeekend ? BENEFIT.MENU.MAIN : BENEFIT.MENU.DESSERT;
     let count = this.orderMenu
       .filter(([menuName]) => MENU[category].some((menu) => menu.name === menuName))
       .reduce((acc, [, menuCount]) => acc + Number(menuCount), 0);
 
     if (count === 0) return;
     benefitDetailsList.push({
-      name: `${isWeekend ? '주말' : '평일'} 할인`,
-      price: count * BENEFIT_DETAILS.IS_WEEKEND_DISCOUNT,
+      name: `${isWeekend ? BENEFIT.WEEK.END_SALE : BENEFIT.WEEK.DAY_SALE}`,
+      price: count * BENEFIT.WEEK.DISCOUNT,
     });
   }
 
-  insertSpecialDiscount(isSpecial, benefitDetailsList) {
+  #insertSpecialDiscount(isSpecial, benefitDetailsList) {
     isSpecial &&
-      benefitDetailsList.push({ name: '특별 할인', price: BENEFIT_DETAILS.IS_SPECIAL_DISCOUNT });
+      benefitDetailsList.push({ name: BENEFIT.SPECIAL.SALE, price: BENEFIT.SPECIAL.DISCOUNT });
   }
 
-  insertGiftEvent(isGiftMenu, benefitDetailsList) {
-    isGiftMenu &&
-      benefitDetailsList.push({ name: '증정 이벤트', price: BENEFIT_DETAILS.GIFT_CHAMPAGNE_PRICE });
+  #insertGiftEvent(isGiftMenu, benefitDetailsList) {
+    isGiftMenu && benefitDetailsList.push({ name: BENEFIT.GIFT.EVENT, price: BENEFIT.GIFT.PRICE });
   }
 
   benefitTotalPrice() {
@@ -84,20 +82,20 @@ export class OrderService {
 
   calculateAfterTotalPrice() {
     const benefitTotalPrice = this.benefitTotalPrice();
-    const isGiftMenuPrice = this.isGiftMenu() ? BENEFIT_DETAILS.GIFT_CHAMPAGNE_PRICE : 0;
+    const isGiftMenuPrice = this.isGiftMenu() ? BENEFIT.GIFT.PRICE : 0;
     return this.#totalPrice - benefitTotalPrice + isGiftMenuPrice;
   }
 
   calculateEventBadge() {
     const totalBenefitPrice = this.benefitTotalPrice();
-    // FIXME: 상수로 빼기
+
     switch (true) {
-      case totalBenefitPrice >= 20000:
-        return '산타';
-      case totalBenefitPrice >= 10000:
-        return '트리';
-      case totalBenefitPrice >= 5000:
-        return '별';
+      case totalBenefitPrice >= BADGE.SANTA_PRICE:
+        return BADGE.SANTA;
+      case totalBenefitPrice >= BADGE.TREE_PRICE:
+        return BADGE.TREE;
+      case totalBenefitPrice >= BADGE.STAR_PRICE:
+        return BADGE.STAR;
       default:
         return '';
     }

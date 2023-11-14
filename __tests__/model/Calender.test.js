@@ -1,5 +1,5 @@
-import { CALENDER, CHIRSTMAS, THIS_MONTH } from '../../src/constants/EventSetting.js';
-import { Calender } from '../../src/model/Calender';
+import { CALENDER, CHIRSTMAS, THIS_MONTH } from '../../src/constants/Date.js';
+import { Calender } from '../../src/model/Calender.js';
 
 describe('Calender 클래스 테스트', () => {
   let calender;

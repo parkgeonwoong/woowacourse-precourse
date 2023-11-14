@@ -1,9 +1,10 @@
 import { ERROR } from '../constants/Error.js';
 import { MAXIMUM_ORDER, MINIMUM_MENU_COUNT } from '../constants/EventSetting.js';
 import { MENU } from '../constants/Menu.js';
+import { toSplitList } from '../utils/ToData.js';
 
 export function menuInputValidator(input) {
-  const inputList = input.split(',').map((menu) => menu.split('-'));
+  const inputList = toSplitList(input);
 
   checkMenuName(inputList);
   checkMenuCount(inputList);

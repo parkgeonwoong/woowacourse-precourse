@@ -4,7 +4,6 @@ export const MENU = Object.freeze({
     { name: '타파스', price: 5500 },
     { name: '시저샐러드', price: 8000 },
   ],
-
   main: [
     { name: '티본스테이크', price: 55000 },
     { name: '바비큐립', price: 54000 },

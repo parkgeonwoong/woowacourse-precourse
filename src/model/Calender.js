@@ -1,4 +1,4 @@
-import { CALENDER, CHIRSTMAS, EVENT_DATE, THIS_MONTH } from '../constants/EventSetting.js';
+import { CALENDER, CHIRSTMAS, EVENT_DATE, THIS_MONTH } from '../constants/Date.js';
 
 export class Calender {
   #calender;
