@@ -20,7 +20,7 @@ export const OutputView = {
   },
 
   printBeforeDiscountPrice(price) {
-    Console.print(`${price}원`);
+    Console.print(`${toCommaFormat(price)}원`);
   },
 
   printGiftMenu() {
@@ -41,5 +41,13 @@ export const OutputView = {
 
   printNothing() {
     Console.print('없음');
+  },
+
+  printTotalBenefit() {
+    Console.print('\n<총혜택 금액>');
+  },
+
+  printTotalBenefitPrice(price) {
+    Console.print(`-${toCommaFormat(price)}원`);
   },
 };

@@ -1,6 +1,6 @@
 import { OrderService } from '../service/OrderService.js';
 import { VisitDateService } from '../service/VisitDateService.js';
-import { toCommaFormat, toSplitList } from '../utils/ToData.js';
+import { toSplitList } from '../utils/ToData.js';
 import { InputView } from '../view/InputView.js';
 import { OutputView } from '../view/OutputView.js';
 
@@ -22,6 +22,7 @@ export class EventPlaner {
     this.readBeforeDiscount();
     this.readGiftMenu();
     this.readBenefitDetails();
+    this.readTotalBenefitPrice();
 
     // console.log(this.#orderService);
     // console.log('visitDate: ', this.#visitDate);
@@ -47,7 +48,7 @@ export class EventPlaner {
 
   readBeforeDiscount() {
     OutputView.printBeforeDiscount();
-    const totalPrice = toCommaFormat(this.#orderService.calculateBeforeTotalPrice());
+    const totalPrice = this.#orderService.calculateBeforeTotalPrice();
     OutputView.printBeforeDiscountPrice(totalPrice);
   }
 
@@ -64,5 +65,11 @@ export class EventPlaner {
     if (benefit.length === 0) {
       OutputView.printNothing();
     }
+  }
+
+  readTotalBenefitPrice() {
+    OutputView.printTotalBenefit();
+    const totalBenefitPrice = this.#orderService.beniefitTotalPrice();
+    OutputView.printTotalBenefitPrice(totalBenefitPrice);
   }
 }
