@@ -24,6 +24,7 @@ export class EventPlaner {
     this.readBenefitDetails();
     this.readTotalBenefitPrice();
     this.readAfterDiscount();
+    this.readEventBadge();
   }
 
   async readAndProcessVisitDate() {
@@ -74,5 +75,10 @@ export class EventPlaner {
     OutputView.printAfterDiscount();
     const totalPrice = this.#orderService.calculateAfterTotalPrice();
     OutputView.printAfterDiscountPrice(totalPrice);
+  }
+
+  readEventBadge() {
+    OutputView.printEventBadge();
+    OutputView.printEventBadgeList(this.#orderService.calculateEventBadge());
   }
 }

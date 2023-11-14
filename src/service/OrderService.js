@@ -86,4 +86,20 @@ export class OrderService {
     const isGiftMenuPrice = this.isGiftMenu() ? BENEFIT_DETAILS.GIFT_CHAMPAGNE_PRICE : 0;
     return this.#totalPrice - benefitTotalPrice + isGiftMenuPrice;
   }
+
+  calculateEventBadge() {
+    let eventBadge = '';
+    const totalBenefitPrice = this.benefitTotalPrice();
+
+    if (totalBenefitPrice >= 5000) {
+      eventBadge = '별';
+    }
+    if (totalBenefitPrice >= 10000) {
+      eventBadge = '트리';
+    }
+    if (totalBenefitPrice >= 20000) {
+      eventBadge = '산타';
+    }
+    return eventBadge;
+  }
 }

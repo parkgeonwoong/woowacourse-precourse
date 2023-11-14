@@ -58,4 +58,12 @@ export const OutputView = {
   printAfterDiscountPrice(price) {
     Console.print(`${toCommaFormat(price)}원`);
   },
+
+  printEventBadge() {
+    Console.print('\n<12월 이벤트 배지>');
+  },
+
+  printEventBadgeList(badge) {
+    Console.print(`${badge ? badge : '없음'}`);
+  },
 };
