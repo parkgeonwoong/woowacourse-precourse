@@ -3,11 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['eslint:recommended', 'prettier'],
+  extends: ['eslint:recommended', 'prettier', 'plugin:jest/recommended'],
   overrides: [
     {
       env: {
         node: true,
+        jest: true,
       },
       files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
@@ -21,5 +22,6 @@ module.exports = {
   },
   rules: {
     'max-depth': ['error', 2],
+    'max-lines-per-function': ['error', { max: 15 }],
   },
 };
