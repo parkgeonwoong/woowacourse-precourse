@@ -56,7 +56,6 @@ export default class BaseballGame {
         state.ball += 1;
       }
     });
-
     return state;
   }
 }
