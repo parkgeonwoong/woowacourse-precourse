@@ -1,8 +1,8 @@
-import BaseballGame from "./BaseballGame.js";
+import BaseballGame from './BaseballGame.js';
 
 export default class App {
   async play() {
-    this.game = await new BaseballGame();
+    this.game = new BaseballGame();
     await this.game.play();
   }
 }
