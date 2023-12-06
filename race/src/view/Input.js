@@ -13,19 +13,3 @@ export async function playerInput() {
   isValidPlayerInput(inputValue);
   return inputValue;
 }
-
-export function printStartResult() {
-  return Console.print(MESSAGE_NOTIFICATION.startResult);
-}
-
-export function printMoveResult(name, advance) {
-  return Console.print(`${name} : ${'-'.repeat(advance)}`);
-}
-
-export function printLine() {
-  return Console.print('');
-}
-
-export function printRacingResult(winner) {
-  return Console.print(`${MESSAGE_NOTIFICATION.racingResult}${winner}`);
-}
