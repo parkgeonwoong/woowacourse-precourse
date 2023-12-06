@@ -15,7 +15,6 @@ class Lotto {
     if (numbers.length !== LOTTO_NUMBER_SIZE) {
       throw new Error(MESSAGE_ERROR.lottoNumberSize);
     }
-
     if (setLottoNumbers.size !== LOTTO_NUMBER_SIZE) {
       throw new Error(MESSAGE_ERROR.lottoDuplicateNumber);
     }

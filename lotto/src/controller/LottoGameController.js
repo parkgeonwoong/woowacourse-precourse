@@ -1,14 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 import { checkLottoResult } from '../utils/CheckLottoResult.js';
 import { incomingProfits } from '../utils/IncomingProfits.js';
-import { inputBounsNumber, inputBuyMoney, inputWinningLotto } from '../view/InputView.js';
-import {
-  printBuyLotto,
-  printLottoArray,
-  printProfitRate,
-  printResult,
-  printResultDetail,
-} from '../view/OutputView.js';
+import { Input } from '../view/InputView.js';
+import { Output } from '../view/OutputView.js';
 import MakeLottoService from '../service/MakeLottoService.js';
 
 export default class LottoGameController {
@@ -20,9 +14,9 @@ export default class LottoGameController {
 
   async play() {
     try {
-      await this.buyLottoMoney();
-      await this.giveLottoNumbers();
-      await this.giveBonusNumber();
+      await this.#buyLotto();
+      await this.#giveLottoNumbers();
+      await this.#giveBonusNumber();
       this.checkLotto();
       this.showProfitRate();
     } catch (err) {
@@ -31,23 +25,23 @@ export default class LottoGameController {
     }
   }
 
-  async buyLottoMoney() {
-    this.#buyLottoMoney = await inputBuyMoney();
+  async #buyLotto() {
+    this.#buyLottoMoney = await Input.buyMoney();
     this.#lottoService = new MakeLottoService(this.#buyLottoMoney);
     this.#printLotto();
   }
 
   #printLotto() {
-    printBuyLotto(this.#lottoService.getLottoCount());
-    printLottoArray(this.#lottoService.getLottoNumbers());
+    Output.buyLotto(this.#lottoService.getLottoCount());
+    Output.lottoArray(this.#lottoService.getLottoNumbers());
   }
 
-  async giveLottoNumbers() {
-    this.#winningLottoNumbers = await inputWinningLotto();
+  async #giveLottoNumbers() {
+    this.#winningLottoNumbers = await Input.winningLotto();
   }
 
-  async giveBonusNumber() {
-    this.#bonusNumber = await inputBounsNumber(this.#winningLottoNumbers);
+  async #giveBonusNumber() {
+    this.#bonusNumber = await Input.bounsNumber(this.#winningLottoNumbers);
   }
 
   checkLotto() {
@@ -56,8 +50,8 @@ export default class LottoGameController {
       this.#winningLottoNumbers,
       this.#bonusNumber,
     );
-    printResult();
-    printResultDetail(result);
+    Output.result();
+    Output.resultDetail(result);
     this.#giveProfitRate(incomingProfits(result, this.#buyLottoMoney));
   }
 
@@ -66,6 +60,6 @@ export default class LottoGameController {
   }
 
   showProfitRate() {
-    printProfitRate(this.#profitRate);
+    Output.profitRate(this.#profitRate);
   }
 }

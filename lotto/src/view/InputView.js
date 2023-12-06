@@ -5,35 +5,37 @@ import { isValidWinningLotto } from '../validator/WinningLottoValidator.js';
 import { isValidBounsNumber } from '../validator/BounsNumberValidator.js';
 import { COMMA } from '../constants/GameSetting.js';
 
-export async function inputBuyMoney() {
-  try {
-    const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.buyMoney);
-    isValidBuyMoney(inputValue);
-    return Number(inputValue);
-  } catch (err) {
-    Console.print(err.message);
-    return inputBuyMoney();
-  }
-}
+export const Input = {
+  async buyMoney() {
+    try {
+      const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.buyMoney);
+      isValidBuyMoney(inputValue);
+      return Number(inputValue);
+    } catch (err) {
+      Console.print(err.message);
+      return Input.buyMoney();
+    }
+  },
 
-export async function inputWinningLotto() {
-  try {
-    const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.winningLotto);
-    isValidWinningLotto(inputValue);
-    return inputValue.split(COMMA).map((number) => Number(number));
-  } catch (err) {
-    Console.print(err.message);
-    return inputWinningLotto();
-  }
-}
+  async winningLotto() {
+    try {
+      const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.winningLotto);
+      isValidWinningLotto(inputValue);
+      return inputValue.split(COMMA).map((number) => Number(number));
+    } catch (err) {
+      Console.print(err.message);
+      return Input.winningLotto();
+    }
+  },
 
-export async function inputBounsNumber(winningLottoNumbers) {
-  try {
-    const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.bonusNumber);
-    isValidBounsNumber(inputValue, winningLottoNumbers);
-    return Number(inputValue);
-  } catch (err) {
-    Console.print(err.message);
-    return inputBounsNumber(winningLottoNumbers);
-  }
-}
+  async bounsNumber(winningLottoNumbers) {
+    try {
+      const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.bonusNumber);
+      isValidBounsNumber(inputValue, winningLottoNumbers);
+      return Number(inputValue);
+    } catch (err) {
+      Console.print(err.message);
+      return Input.bounsNumber(winningLottoNumbers);
+    }
+  },
+};
