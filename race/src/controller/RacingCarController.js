@@ -14,38 +14,33 @@ export default class RacingCarController {
   #CarArr = [];
 
   async play() {
-    this.getCarNameInput(await carNameInput());
-    this.getPlayerInput(await playerInput());
+    this.#getCarNames(await carNameInput());
+    this.#getPlayerCount(await playerInput());
   }
 
-  getCarNameInput(input) {
+  #getCarNames(input) {
     const splitInput = input.split(',');
     splitInput.forEach((carName) => {
       this.#CarArr.push(new Car(carName));
     });
   }
 
-  getPlayerInput(input) {
-    this.racingStart(input);
+  #getPlayerCount(input) {
+    this.#racingStart(input);
   }
 
-  racingStart(count) {
+  #racingStart(count) {
     printStartResult();
-
-    for (let i = 0; i < count; i++) {
-      this.racingMoveOnce();
-    }
-    this.getWinner();
+    Array.from({ length: count }, () => this.#racingMoveOnce());
+    this.#getWinner();
   }
 
-  racingMoveOnce() {
-    this.#CarArr.forEach((car) => {
-      car.setAdvance(RandomInRange());
-    });
-    this.racingPrintMoveOnce();
+  #racingMoveOnce() {
+    this.#CarArr.forEach((car) => car.setAdvance(RandomInRange()));
+    this.#racingPrintMoveOnce();
   }
 
-  racingPrintMoveOnce() {
+  #racingPrintMoveOnce() {
     this.#CarArr.forEach((car) => {
       const name = car.getName();
       const advance = car.getAdvance();
@@ -54,7 +49,7 @@ export default class RacingCarController {
     printLine();
   }
 
-  getWinner() {
+  #getWinner() {
     const winner = CheckWinner(this.#CarArr).join(', ');
     printRacingResult(winner);
   }

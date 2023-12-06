@@ -3,7 +3,6 @@ import { MESSAGE_ERROR } from '../constants/Message.js';
 
 const isNumber = (input) => {
   const regExp = /^[0-9]+$/;
-
   if (!regExp.test(input)) {
     throw new Error(MESSAGE_ERROR.errorIsNumber);
   }
@@ -15,7 +14,6 @@ export function isValidPlayerInput(input) {
 
 const isCarName = (inputArr) => {
   const regExp = /\s/g;
-
   inputArr.forEach((carName) => {
     if (carName.length > GAME_CAR_NAME_LENGTH) {
       throw new Error(MESSAGE_ERROR.errorCarNameLength);
@@ -35,7 +33,6 @@ const isCarDuplicate = (inputArr) => {
 
 export function isValidCarName(input) {
   const inputArr = input.split(',');
-
   isCarName(inputArr);
   isCarDuplicate(inputArr);
 }
