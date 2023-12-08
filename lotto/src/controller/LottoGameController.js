@@ -17,8 +17,8 @@ export default class LottoGameController {
       await this.#buyLotto();
       await this.#giveLottoNumbers();
       await this.#giveBonusNumber();
-      this.checkLotto();
-      this.showProfitRate();
+      this.#checkLotto();
+      this.#showProfitRate();
     } catch (err) {
       Console.print(err.message);
       await this.play();
@@ -44,7 +44,7 @@ export default class LottoGameController {
     this.#bonusNumber = await Input.bounsNumber(this.#winningLottoNumbers);
   }
 
-  checkLotto() {
+  #checkLotto() {
     const result = checkLottoResult(
       this.#lottoService.getLottoNumbers(),
       this.#winningLottoNumbers,
@@ -59,7 +59,7 @@ export default class LottoGameController {
     this.#profitRate = profit;
   }
 
-  showProfitRate() {
+  #showProfitRate() {
     Output.profitRate(this.#profitRate);
   }
 }
